@@ -9,10 +9,25 @@ pygame.init()
 
 # create the display surface object
 # of specific dimension..e(500, 500).
-win = pygame.display.set_mode((500, 500))
+winDim = 500
+carDim = 15
+laneDim= 30
+lineThickness = 5
+laneLength = (winDim - laneDim) / 2
+
+# Initializing colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+
+win = pygame.display.set_mode((winDim, winDim))
 
 # set the pygame window name
-pygame.display.set_caption("Moving rectangle")
+pygame.display.set_caption("Crossroads")
+
+# drawing lane lines
 
 # object current co-ordinates
 x = 200
@@ -52,7 +67,7 @@ while run:
         x -= vel
 
         # if left arrow key is pressed
-    if keys[pygame.K_RIGHT] and x < 500 - width:
+    if keys[pygame.K_RIGHT] and x < winDim - carDim:
         # increment in x co-ordinate
         x += vel
 
@@ -62,18 +77,30 @@ while run:
         y -= vel
 
         # if left arrow key is pressed
-    if keys[pygame.K_DOWN] and y < 500 - height:
+    if keys[pygame.K_DOWN] and y < winDim - carDim:
         # increment in y co-ordinate
         y += vel
 
         # completely fill the surface object
     # with black colour
-    win.fill((0, 0, 0))
+    win.fill(BLACK)
 
     # drawing object on screen which is rectangle here
-    pygame.draw.rect(win, (255, 0,  0), (x, y, width, height))
+    pygame.draw.rect(win, RED , (x, y, carDim, carDim))
+    pygame.draw.line(win, WHITE, (laneLength, 0), (laneLength, laneLength),lineThickness)
+    pygame.draw.line(win, WHITE, (laneLength+laneDim, 0), (laneLength+laneDim, laneLength),lineThickness)
+    pygame.draw.line(win, WHITE, (0, laneLength), (laneLength, laneLength),lineThickness)
+    pygame.draw.line(win, WHITE, (0, laneLength+laneDim), (laneLength, laneLength+laneDim),lineThickness)
+    pygame.draw.line(win, WHITE, (laneLength, winDim), (laneLength, laneLength+laneDim),lineThickness)
+    pygame.draw.line(win, WHITE, (laneLength+laneDim, winDim), (laneLength+laneDim, laneLength+laneDim),lineThickness)
+    pygame.draw.line(win, WHITE, (winDim, laneLength), (laneLength+laneDim, laneLength),lineThickness)
+    pygame.draw.line(win, WHITE, (winDim, laneLength+laneDim), (laneLength+laneDim, laneLength+laneDim),lineThickness)
 
-    # it refreshes the window
+
+
+
+
+# it refreshes the window
     pygame.display.update()
 
 # closes the pygame window
