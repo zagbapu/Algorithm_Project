@@ -85,7 +85,7 @@ pygame.display.set_caption("Crossroads")
 # drawing lane lines
 
 # object current co-ordinates
-x = winDim/2
+x = carDim
 y = winDim/2
 
 # dimensions of the object
@@ -93,7 +93,7 @@ width = 15
 height = 15
 
 # velocity / speed of movement
-vel = 5
+vel = 1
 
 # Indicates pygame is running
 run = True
