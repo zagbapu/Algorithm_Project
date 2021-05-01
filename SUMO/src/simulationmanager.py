@@ -1,9 +1,10 @@
-from src.intersectionController import IntersectionController
-from src.platoon import Platoon
-from src.vehicle import Vehicle
-from src.simlib import flatten
+from SUMO.src.intersectionController import IntersectionController
+from SUMO.src.platoon import Platoon
+from SUMO.src.vehicle import Vehicle
+from SUMO.src.simlib import flatten
 
 import traci
+
 
 class SimulationManager():
 
@@ -14,7 +15,7 @@ class SimulationManager():
         self.vehicles = list()
         self.maxStoppedVehicles = dict()
         if iCoordination:
-            for intersection in traci.trafficlights.getIDList():
+            for intersection in traci.trafficlight.getIDList():
                 controller = IntersectionController(intersection, iZipping)
                 self.intersections.append(controller)
 
@@ -39,7 +40,7 @@ class SimulationManager():
                 count = count + platoon.getNumberOfVehicles()
             else:
                 length = length - 1
-        return count/length
+        return count / length
 
     def getPlatoonByLane(self, lane):
         # Gets platoons corresponding to a given lane
@@ -48,15 +49,16 @@ class SimulationManager():
     def getPlatoonByVehicle(self, v):
         return [p for p in self.getActivePlatoons() if v in p.getAllVehiclesByName()]
 
-    def getReleventPlatoon(self, vehicle):
-        # Returns a single platoon that is most relevent to the given
+    def getRelevantPlatoon(self, vehicle):
+        # Returns a single platoon that is most relevant to the given
         # vehicle by looking to see if the car in front is part of a platoon
         # It also checks that the platoon is heading in the right direction
         leadVeh = vehicle.getLeader()
         if leadVeh and leadVeh[1] < 10:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
             if possiblePlatoon:
-                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[0].getAllVehicles():
+                if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[
+                    0].getAllVehicles():
                     return possiblePlatoon[0]
 
     def handleSimulationStep(self):
@@ -96,7 +98,7 @@ class SimulationManager():
                 self.vehicles.append(vehicle)
                 vehicleLane = vehicle.getLane()
                 # If we're not in a starting segment (speed starts as 0)
-                possiblePlatoon = self.getReleventPlatoon(vehicle)
+                possiblePlatoon = self.getRelevantPlatoon(vehicle)
                 if possiblePlatoon:
                     possiblePlatoon.addVehicle(vehicle)
                 else:
@@ -106,8 +108,8 @@ class SimulationManager():
         # control
         if self.intersections:
             for inControl in self.intersections:
-                inControl.removeIrreleventPlatoons()
-                inControl.findAndAddReleventPlatoons(self.getActivePlatoons())
+                inControl.removeIrrelevantPlatoons()
+                inControl.findAndAddRelevantPlatoons(self.getActivePlatoons())
                 inControl.update()
 
         if self.platoonCreation:

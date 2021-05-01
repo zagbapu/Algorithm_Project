@@ -1,11 +1,11 @@
 import traci
 import logging
-from src.simlib import flatten
+from SUMO.src.simlib import flatten
 
 class IntersectionController():
 
     def __init__(self, intersection, zip=True):
-        lanes = traci.trafficlights.getControlledLanes(intersection)
+        lanes = traci.trafficlight.getControlledLanes(intersection)
         self.lanesServed = set(lanes)
         self.name = intersection
         self.platoons = []
@@ -38,7 +38,7 @@ class IntersectionController():
             if platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() < 10 and platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() > 0:
                 return z
 
-    def removeIrreleventPlatoons(self):
+    def removeIrrelevantPlatoons(self):
         """
         Function to remove any platoons from the intersection that have either left the sphere of influence or left the map
         """
@@ -54,7 +54,7 @@ class IntersectionController():
                         if not zip:
                             self.platoonZips.remove(zip)
 
-    def findAndAddReleventPlatoons(self, platoons):
+    def findAndAddRelevantPlatoons(self, platoons):
         """
         Finds platoons in the given list that can be managed by this controller, then
         adds them

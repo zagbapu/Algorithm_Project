@@ -1,4 +1,4 @@
 <viewsettings>
-    <viewport y="100" x="100" zoom="150"/>
-    <delay value="100"/>
+    <viewport y="0" x="0" zoom="95"/>
+    <delay value="10"/>
 </viewsettings>

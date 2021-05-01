@@ -1,0 +1,15 @@
+<routes>
+  <vType id="normal_car" vClass="passenger" departspeed="max"/>
+  <flow id="WtoN" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="leftin" to="upout" departPos="last"/>
+  <flow id="WtoE" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="leftin" to="rightout" departPos="last"/>
+  <flow id="WtoS" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="leftin" to="downout" departPos="last"/>
+  <flow id="NtoW" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="upin" to="leftout" departPos="last"/>
+  <flow id="NtoS" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="upin" to="downout" departPos="last"/>
+  <flow id="NtoE" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="upin" to="rightout" departPos="last"/>
+  <flow id="EtoS" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="rightin" to="downout" departPos="last"/>
+  <flow id="EtoW" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="rightin" to="leftout" departPos="last"/>
+  <flow id="EtoN" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="rightin" to="upout" departPos="last"/>
+  <flow id="StoW" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="downin" to="leftout" departPos="last"/>
+  <flow id="StoN" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="downin" to="upout" departPos="last"/>
+  <flow id="StoE" type="normal_car" begin="0" end="5000" vehsPerHour="350" from="downin" to="rightout" departPos="last"/>
+</routes>
