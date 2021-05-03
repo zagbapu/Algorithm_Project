@@ -11,6 +11,7 @@ step = 0
 manager = SimulationManager(True, True, False)
 while step < 5000:
     manager.handleSimulationStep()
+
     traci.simulationStep()
     step += 1
 

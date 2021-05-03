@@ -54,7 +54,7 @@ class SimulationManager():
         # vehicle by looking to see if the car in front is part of a platoon
         # It also checks that the platoon is heading in the right direction
         leadVeh = vehicle.getLeader()
-        if leadVeh and leadVeh[1] < 10:
+        if leadVeh and leadVeh[1] < 30:
             possiblePlatoon = self.getPlatoonByVehicle(leadVeh[0])
             if possiblePlatoon:
                 if possiblePlatoon[0].checkVehiclePathsConverge([vehicle]) and vehicle not in possiblePlatoon[
@@ -106,8 +106,8 @@ class SimulationManager():
 
         # If we're doing intersection management, update each controller and add any new platoons into their
         # control
-        if self.intersections:
-            for inControl in self.intersections:
+        if self.intersections: # If there are any intersections in simManager
+            for inControl in self.intersections: # for each intersection
                 inControl.removeIrrelevantPlatoons()
                 inControl.findAndAddRelevantPlatoons(self.getActivePlatoons())
                 inControl.update()
@@ -123,3 +123,4 @@ class SimulationManager():
                         leadPlatoon = self.getPlatoonByVehicle(lead[0])
                         if leadPlatoon:
                             leadPlatoon[0].mergePlatoon(platoon)
+

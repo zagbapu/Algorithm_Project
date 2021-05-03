@@ -1,4 +1,5 @@
 <viewsettings>
-    <viewport y="0" x="0" zoom="95"/>
-    <delay value="10"/>
+    <viewport y="100" x="100" zoom="605"/>
+    <delay value="100"/>
+    <scheme name="real world"/>
 </viewsettings>

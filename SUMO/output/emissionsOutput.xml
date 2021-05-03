@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 4/30/2021 10:51:22 PM by Eclipse SUMO GUI Version 1.9.0
+<!-- generated on 5/2/2021 9:56:22 PM by Eclipse SUMO GUI Version 1.9.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
         <net-file value="../maps/NormalIntersection_no_TLS/NormalIntersection_no_TLS3.net.xml"/>
-        <route-files value="../maps/NormalIntersection_no_TLS/NormalIntersection_no_TLS3.rou.xml"/>
+        <route-files value="../maps/NormalIntersection_no_TLS/NormalIntersection_no_TLS4.rou.xml"/>
         <additional-files value="../output/additional.xml"/>
     </input>
+
+    <output>
+        <summary-output value="../output/siminfo.xml"/>
+    </output>
 
     <time>
         <step-length value="0.1"/>
@@ -24,7 +28,7 @@
     </report>
 
     <traci_server>
-        <remote-port value="58469"/>
+        <remote-port value="50508"/>
     </traci_server>
 
     <gui_only>

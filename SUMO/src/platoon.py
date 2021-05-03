@@ -23,6 +23,9 @@ class Platoon():
         self.getLeadVehicle().setColor(self._color)
         self.startBehaviour(startingVehicles[1:])
 
+    def __repr__(self):
+        return self.getI()
+
     def addControlledLanes(self, lanes):
         for lane in lanes:
             self._controlledLanes.add(lane)

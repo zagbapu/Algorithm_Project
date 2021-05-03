@@ -12,6 +12,7 @@ class IntersectionController():
         self.platoonsZipped = set()
         self.platoonZips = []
         self.zip = zip
+        # self.cells = []
 
     def addPlatoon(self, platoon):
         """
@@ -140,8 +141,8 @@ class IntersectionController():
     def update(self):
         """
         Performs various functions to update the junction's state.
-        1. Ensures that all vehicles being managed by the junction, have thier automatic
-           stopping behaviour deactived (otherwise they are too cautious at the intersection)
+        1. Ensures that all vehicles being managed by the junction, have their automatic
+           stopping behaviour deactivated (otherwise they are too cautious at the intersection)
         2. Removes platoons that are no longer in the sphere of influence of the function
         3. Updates the speed of all platoons being managed by the controller.
         """
@@ -197,3 +198,7 @@ class IntersectionController():
                     if p.getAllVehicles()[i].getLane() in self.lanesServed:
                         ret.append(p.getAllVehicles()[i])
         return ret
+
+    # def ZISController(self):
+    #     #Get the platoons in the sim
+    #     self.

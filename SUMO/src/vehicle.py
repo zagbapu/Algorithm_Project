@@ -1,7 +1,8 @@
 import traci
 
+
 class Vehicle():
-    
+
     def __init__(self, vehicle):
         self._active = True
         self._acceleration = traci.vehicle.getAcceleration(vehicle)
@@ -11,12 +12,18 @@ class Vehicle():
         self._route = traci.vehicle.getRoute(vehicle)
         self._previouslySetValues = dict()
 
+    def __str__(self):
+        return self.getName() + " : " + self.getSpeed() + " m/s"
+
+    def __repr__(self):
+        return self.getName()
+
     def getAcceleration(self):
         return self._acceleration
 
     def isActive(self):
         return self._active
-    
+
     def getEdge(self):
         return traci.vehicle.getRoadID(self.getName())
 
@@ -33,7 +40,7 @@ class Vehicle():
         return traci.lane.getLength(self.getLane()) - self.getLanePosition()
 
     def getLeader(self):
-        return traci.vehicle.getLeader(self.getName(), 20)
+        return traci.vehicle.getLeader(self.getName(), 50)
 
     def getLength(self):
         return self._length
@@ -89,3 +96,10 @@ class Vehicle():
                     return
             self._previouslySetValues[attr] = arg
             getattr(traci.vehicle, attr)(self.getName(), arg)
+
+    # def createReservationRequest(self):
+    #     rc = self.getRouteCells()
+    #     ID = self.getName()
+    #     for
+
+
