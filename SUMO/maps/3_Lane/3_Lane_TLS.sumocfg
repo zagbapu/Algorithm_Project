@@ -1,0 +1,7 @@
+<configuration>
+   <input>
+       <net-file value="3_Lane_TLS.net.xml"/>
+       <route-files value="3_Lane.rou.xml"/>
+	   <gui-settings-file value="gui.settings.xml"/>
+   </input>
+</configuration>

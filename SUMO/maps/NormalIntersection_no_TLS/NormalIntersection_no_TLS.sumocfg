@@ -1,7 +1,0 @@
-<configuration>
-   <input>
-       <net-file value="NormalIntersection_no_TLS.net.xml"/>
-       <route-files value="NormalIntersection_no_TLS3.rou.xml"/>
-	   <gui-settings-file value="gui.settings.xml"/>
-   </input>
-</configuration>

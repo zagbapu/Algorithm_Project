@@ -169,7 +169,7 @@ class Platoon():
         Speed mode is a SUMO function that allows different behaviour once the setSpeed
         function has been called. Including ignoring safe speed threholds and junctions.
         Used here so that vehicles don't brake unncessarily when closing distances are tight
-        during CIM.
+        during 3_Lane.
         """
         for v in self.getAllVehicles():
             v.setSpeedMode(speedMode)

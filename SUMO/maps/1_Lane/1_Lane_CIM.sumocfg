@@ -1,0 +1,7 @@
+<configuration>
+   <input>
+       <net-file value="1_Lane_CIM.net.xml"/>
+       <route-files value="1_Lane.rou.xml"/>
+	   <gui-settings-file value="gui.settings.xml"/>
+   </input>
+</configuration>
