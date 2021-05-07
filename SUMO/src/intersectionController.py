@@ -1,6 +1,27 @@
+import math
+
 import traci
 import logging
 from SUMO.src.simlib import flatten
+
+
+class Cell():
+    def __init__(self, ID, x, y):
+        self.name = ID
+        self.x = x
+        self.y = y
+
+    def isInCell(self, vehicle):
+        vehPos = vehicle.getPosition()
+        vehX = vehPos[0]
+        vehY = vehPos[1]
+        dist = math.sqrt((self.x-vehX)** 2 + (self.y-vehY)** 2)
+        if dist < 3:
+            return True
+        else:
+            return False
+
+
 
 class IntersectionController():
 
@@ -12,7 +33,7 @@ class IntersectionController():
         self.platoonsZipped = set()
         self.platoonZips = []
         self.zip = zip
-        # self.cells = []
+        self.cells = self.addCells()
 
     def addPlatoon(self, platoon):
         """
@@ -36,7 +57,9 @@ class IntersectionController():
     def _eligibleZippings(self, platoon):
         if len(self.platoonZips) >= 1:
             z = self.platoonZips[-1]
-            if platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() < 10 and platoon.getLanePositionFromFront() - z[-1].getLanePositionFromFront() > 0:
+            if platoon.getLanePositionFromFront() - z[
+                -1].getLanePositionFromFront() < 10 and platoon.getLanePositionFromFront() - z[
+                -1].getLanePositionFromFront() > 0:
                 return z
 
     def removeIrrelevantPlatoons(self):
@@ -60,6 +83,7 @@ class IntersectionController():
         Finds platoons in the given list that can be managed by this controller, then
         adds them
         """
+
         def platoonPosition(platoon):
             return self._getLanePosition(platoon)
 
@@ -72,6 +96,7 @@ class IntersectionController():
         """
         Gets the order that a platoon should [pass through the junction if zipping is enabled
         """
+
         def distSort(elem):
             return elem.getLanePositionFromFront()
 
@@ -175,7 +200,8 @@ class IntersectionController():
             if self.zip:
                 for v in self.getVehicleZipOrderThroughJunc():
                     if v.isActive():
-                        setSpeed = v._previouslySetValues['setSpeed'] if 'setSpeed' in v._previouslySetValues else "None"
+                        setSpeed = v._previouslySetValues[
+                            'setSpeed'] if 'setSpeed' in v._previouslySetValues else "None"
                         logging.info("Vehicle: %s, Target: %s, Current: %s", v.getName(), setSpeed, v.getSpeed())
                 logging.info("------------Platoon Zips------------")
                 for zip in self.platoonZips:
@@ -199,6 +225,16 @@ class IntersectionController():
                         ret.append(p.getAllVehicles()[i])
         return ret
 
-    # def ZISController(self):
-    #     #Get the platoons in the sim
-    #     self.
+    def addCells(self):
+        cellCoordinates = [['A', 95, 105],
+                           ['B', 100, 105],
+                           ['C', 105, 105],
+                           ['D', 95, 100],
+                           ['E', 105, 100],
+                           ['F', 95, 95],
+                           ['G', 100, 95],
+                           ['H', 105, 95], ]
+        cellList = []
+        for cell in cellCoordinates:
+            cellList.append(Cell(cell[0], cell[1], cell[2]))
+        return cellList

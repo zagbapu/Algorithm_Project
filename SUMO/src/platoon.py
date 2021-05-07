@@ -2,6 +2,7 @@ import logging
 import traci
 import random
 
+
 class Platoon():
 
     def __init__(self, startingVehicles):
@@ -24,7 +25,7 @@ class Platoon():
         self.startBehaviour(startingVehicles[1:])
 
     def __repr__(self):
-        return self.getI()
+        return self.getID()
 
     def addControlledLanes(self, lanes):
         for lane in lanes:
@@ -123,6 +124,21 @@ class Platoon():
     def isActive(self):
         """Is the platoon currently active within the scenario"""
         return self._active
+
+    def isInIntersection(self):
+        for vehicle in self.getAllVehicles():
+            pos = vehicle.getPosition()
+            x = pos[0]
+            y = pos[1]
+            if 90 < x < 110 and 90 < y < 110:
+                return True
+        return False
+
+    def isInCell(self, cell):
+        for vehicle in self.getAllVehicles():
+            if cell.isInCell(vehicle):
+                return True
+        return False
 
     def mergePlatoon(self, platoon):
         """Merges the given platoon into the current platoon"""
@@ -245,7 +261,7 @@ class Platoon():
             if not self._currentSpeed == 0:
                 if not self.checkVehiclePathsConverge(self.getAllVehicles()):
                     self._disbandReason = "Platoon paths now diverge"
-                    self.disband()            
+                    self.disband()
 
     def _updateSpeed(self, speed, inclLeadingVeh=True):
         """ Sets the speed of all vehicles in the platoon

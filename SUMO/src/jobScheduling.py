@@ -4,16 +4,10 @@ import collections
 from ortools.sat.python import cp_model
 
 
-def MinimalplatshopSat():
-    """Minimal platshop problem."""
+def JobScheduling(plats_data):
+    """Minimal platoon problem."""
     # Create the model.
     model = cp_model.CpModel()
-
-    plats_data = [  # task = (node_id, processing_time).
-        [(0, 3), (1, 2), (2, 2)],  # plat0
-        [(0, 2), (2, 1), (1, 4)],  # plat1
-        [(1, 4), (2, 3)]  # plat2
-    ]
 
     nodes_count = 1 + max(task[0] for plat in plats_data for task in plat)
     all_nodes = range(nodes_count)
@@ -41,8 +35,8 @@ def MinimalplatshopSat():
             interval_var = model.NewIntervalVar(start_var, duration, end_var,
                                                 'interval' + suffix)
             all_tasks[plat_id, task_id] = task_type(start=start_var,
-                                                       end=end_var,
-                                                       interval=interval_var)
+                                                    end=end_var,
+                                                    interval=interval_var)
             node_to_intervals[node].append(interval_var)
 
     # Create and add disjunctive constraints.
@@ -108,5 +102,17 @@ def MinimalplatshopSat():
         print('Optimal Schedule Length: %i' % solver.ObjectiveValue())
         print(output)
 
+def reservationSimulation(platoon, step):
+    rc = []
+    rta = []
+    rtd = []
+    s = platoon.getMaxSpeed()
+    dint = s * step
+    t = 0
+    while platoon.isInIntersection():
+        rc.append([cell not in rc for cell in platoon.getCells()])
+        rta.append(t - 1)
+        rtd.append(t + 1)
+        t += 1
 
-MinimalplatshopSat()
+

@@ -24,6 +24,14 @@ class Vehicle():
     def isActive(self):
         return self._active
 
+    def isInIntersection(self):
+        pos = self.getPosition()
+        x = pos[0]
+        y = pos[1]
+        if 90 < x < 110 and 90 < y < 110:
+            return True
+        return False
+
     def getEdge(self):
         return traci.vehicle.getRoadID(self.getName())
 
@@ -50,6 +58,9 @@ class Vehicle():
 
     def getName(self):
         return self._name
+
+    def getPosition(self):
+        return traci.vehicle.getPosition(self.getName())
 
     def getRemainingRoute(self):
         return self._route[traci.vehicle.getRouteIndex(self.getName()):]
@@ -101,5 +112,3 @@ class Vehicle():
     #     rc = self.getRouteCells()
     #     ID = self.getName()
     #     for
-
-
